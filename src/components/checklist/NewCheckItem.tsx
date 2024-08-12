@@ -53,7 +53,7 @@ export default function NewCheckItem(props: Props) {
 
                 {
                     props.item.quantityType === "fixed" ? (
-                        <Form.Control type="text" placeholder="固定個数" min={0}
+                        <Form.Control type="number" placeholder="固定個数" min={1}
                             value={props.item.fixedQuantity}
                             onChange={e => props.onChangeItem({...props.item, fixedQuantity: Number(e.target.value)})} />
                     ) : (<></>)
