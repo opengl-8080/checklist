@@ -22,7 +22,7 @@ function CheckListList() {
 
             <ListGroup>
                 {checkLists.map((checkList, index) => (
-                    <ListGroup.Item key={index} action href={`/checklist?id=${checkList.id}`}>
+                    <ListGroup.Item key={index} action as={Link} to={`/checklist?id=${checkList.id}`}>
                         {checkList.name}
                     </ListGroup.Item>
                 ))}

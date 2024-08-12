@@ -8,6 +8,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import Stack from 'react-bootstrap/Stack';
 import "./CheckListPage.css";
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
 
 function CheckListPage() {
@@ -131,9 +132,11 @@ function CheckListPage() {
                 })} variant="secondary">リセット</Button>
             </Form.Group>
 
-            <Form.Group className="mb-3 d-grid gap-2">
-                <Button href={`/checklist/modify?id=${checkList.id}`}>編集</Button>
-            </Form.Group>
+            <Link to={`/checklist/modify?id=${checkList.id}`}>
+                <Form.Group className="mb-3 d-grid gap-2">
+                    <Button>編集</Button>
+                </Form.Group>
+            </Link>
         </Stack>
     );
 }

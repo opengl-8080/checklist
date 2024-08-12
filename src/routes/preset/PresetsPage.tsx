@@ -24,7 +24,7 @@ export default function PresetsPage() {
 
             <ListGroup>
                 {presets.map((preset, index) => (
-                    <ListGroup.Item key={index} action href={`/preset/modify?id=${preset.id}`}>
+                    <ListGroup.Item key={index} action as={Link} to={`/preset/modify?id=${preset.id}`}>
                         {preset.name}
                     </ListGroup.Item>
                 ))}
