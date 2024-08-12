@@ -20,7 +20,7 @@ export default function PresetAppender(props: Props) {
         }
 
         const presets = PresetService.findAll();
-        if (presets) {
+        if (presets && 0 < presets.length) {
             setPresets(presets);
             setPresetId(presets[0].id);
         }
@@ -50,7 +50,7 @@ export default function PresetAppender(props: Props) {
                         </Form.Group>
 
                         <div className="d-grid gap-2">
-                            <Button onClick={onClickAddPreset}>プリセットから追加</Button>
+                            <Button onClick={onClickAddPreset} disabled={!presetId}>プリセットから追加</Button>
                         </div>
                     </Accordion.Body>
                 </Accordion.Item>
