@@ -13,6 +13,11 @@ interface Props {
 export default function NewCheckItem(props: Props) {
 
     const [addButtonEnable, setAddButtonEnable] = useState(false);
+    const [name, setName] = useState("");
+
+    useEffect(() => {
+        setName(props.item.name);
+    }, [props.item.name]);
 
     useEffect(() => {
         setAddButtonEnable(
@@ -25,6 +30,7 @@ export default function NewCheckItem(props: Props) {
     }, [props.item.name, props.item.quantityType, props.item.fixedQuantity]);
 
     function onClickAddButton() {
+        setName("");
         props.onAddCheckItem({...props.item});
     }
 
@@ -36,8 +42,11 @@ export default function NewCheckItem(props: Props) {
             <Form.Group className="mb-3">
                 <Form.Label>項目名</Form.Label>
                 <Form.Control type="text" placeholder="項目名" min={0}
-                    value={props.item.name}
-                    onChange={e => props.onChangeItem({...props.item, name: e.target.value})} />
+                    value={name}
+                    onChange={e => {
+                        setName(e.target.value);
+                        props.onChangeItem({...props.item, name: e.target.value});
+                    }} />
             </Form.Group>
             
             <Form.Group className="mb-3">
