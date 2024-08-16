@@ -23,6 +23,11 @@ class CheckListService {
         this.flush();
     }
 
+    updateAll(checkLists: CheckListDto[]) {
+        this.checkLists = checkLists;
+        this.flush();
+    }
+
     register(checkList: CheckListDto) {
         this.checkLists.push(checkList);
         this.flush();
@@ -33,7 +38,7 @@ class CheckListService {
         this.flush();
     }
 
-    flush() {
+    private flush() {
         window.localStorage.setItem(LOCAL_STORAGE_KEY, window.JSON.stringify(this.checkLists));
     }
 }

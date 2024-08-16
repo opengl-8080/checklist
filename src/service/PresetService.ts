@@ -28,12 +28,17 @@ class PresetService {
         this.flush();
     }
 
+    updateAll(presets: PresetDto[]) {
+        this.presets = presets;
+        this.flush();
+    }
+
     remove(id: string) {
         this.presets = this.presets.filter(it => it.id !== id);
         this.flush();
     }
 
-    flush() {
+    private flush() {
         window.localStorage.setItem(LOCAL_STORAGE_KEY, window.JSON.stringify(this.presets));
     }
 }
