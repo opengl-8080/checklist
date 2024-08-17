@@ -22,7 +22,7 @@ function Layout() {
                             <NavDropdown.Item as={Link} to="/presets">一覧</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/preset/register">登録</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Item>v1.1.0</Nav.Item>
+                        <Nav.Item>v1.2.0</Nav.Item>
                     </Nav>
                     </Navbar.Collapse>
                 </Container>

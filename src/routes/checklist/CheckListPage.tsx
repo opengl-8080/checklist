@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 
 function CheckListPage() {
     const [checkList, setCheckList] = useState<CheckListDto>(new CheckListDto());
+    const [showCheckedItem, setShowCheckedItem] = useState(false);
 
     let initialized = false;
     useEffect(() => {
@@ -90,6 +91,19 @@ function CheckListPage() {
                 </Accordion.Item>
             </Accordion>
 
+            <Form.Group className="d-grid gap-2">
+                <ToggleButton
+                    id="showCheckItem1"
+                    value="showCheckItem1"
+                    variant="outline-success"
+                    checked={showCheckedItem}
+                    type="checkbox"
+                    onChange={e => setShowCheckedItem(e.target.checked)}
+                    >
+                    {showCheckedItem ? "チェック済みを表示" : "チェック済みを非表示"}
+                </ToggleButton>
+            </Form.Group>
+
             <Table striped bordered>
                 <thead>
                     <tr>
@@ -101,6 +115,7 @@ function CheckListPage() {
                 <tbody>
                     {
                         checkList.items.map((item, index) => (
+                            showCheckedItem || !item.checked ?
                             <tr key={index}>
                                 <td>{item.name}</td>
                                 <td>{item.fixedQuantity}</td>
@@ -120,10 +135,23 @@ function CheckListPage() {
                                         </ToggleButton>
                                 </td>
                             </tr>
+                            : <></>
                         ))
                     }
                 </tbody>
             </Table>
+
+            <Form.Group className="d-grid gap-2">
+                <ToggleButton
+                    id="showCheckItem2"
+                    value="showCheckItem2"
+                    variant="outline-success"
+                    checked={showCheckedItem}
+                    type="checkbox"
+                    >
+                    {showCheckedItem ? "チェック済みを非表示" : "チェック済みを表示"}
+                </ToggleButton>
+            </Form.Group>
 
             <Form.Group className="d-grid gap-2">
                 <Button onClick={() => setCheckList({
