@@ -41,55 +41,53 @@ function CheckListPage() {
             <h1>チェックリスト</h1>
             <h2>{checkList.name}</h2>
 
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>個数パラメータ</Accordion.Header>
-                    <Accordion.Body>
-                        <Form>
-                        {
-                            checkList.items.find(item => item.quantityType !== "fixed") ? (
-                                <>
-                                    <Form.Group className="mb-3" controlId="formGroupEmail">
-                                        <Form.Label>宿泊日数</Form.Label>
-                                        <Form.Control type="number" placeholder="宿泊日数" min={0}
-                                            value={checkList.stayCount}
-                                            onChange={e => setCheckList({
-                                                ...checkList,
-                                                stayCount: Number(e.target.value),
-                                                items: checkList.items.map(item => {
-                                                    if (item.quantityType === "fixed") {
-                                                        return item;
-                                                    } else if (item.quantityType === "stay") {
-                                                        return {...item, fixedQuantity: Number(e.target.value)};
-                                                    } else {
-                                                        return {...item, fixedQuantity: Number(e.target.value) - checkList.washableCount};
-                                                    }
-                                                })
-                                            })} />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formGroupEmail">
-                                        <Form.Label>洗濯可能日数</Form.Label>
-                                        <Form.Control type="number" placeholder="洗濯可能日数" min={0} 
-                                            value={checkList.washableCount}
-                                            onChange={e => setCheckList({
-                                                ...checkList,
-                                                washableCount: Number(e.target.value),
-                                                items: checkList.items.map(item => {
-                                                    if (item.quantityType === "washing") {
-                                                        return {...item, fixedQuantity: checkList.stayCount - Number(e.target.value)};
-                                                    } else {
-                                                        return item;
-                                                    }
-                                                })
-                                            })} />
-                                    </Form.Group>
-                                </>
-                            ):(<></>)
-                        }
-                        </Form>
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
+            {
+                checkList.items.find(item => item.quantityType !== "fixed") ? (
+                <Accordion defaultActiveKey="0">
+                    <Accordion.Item eventKey="0">
+                        <Accordion.Header>個数パラメータ</Accordion.Header>
+                        <Accordion.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formGroupEmail">
+                                    <Form.Label>宿泊日数</Form.Label>
+                                    <Form.Control type="number" placeholder="宿泊日数" min={0}
+                                        value={checkList.stayCount}
+                                        onChange={e => setCheckList({
+                                            ...checkList,
+                                            stayCount: Number(e.target.value),
+                                            items: checkList.items.map(item => {
+                                                if (item.quantityType === "fixed") {
+                                                    return item;
+                                                } else if (item.quantityType === "stay") {
+                                                    return {...item, fixedQuantity: Number(e.target.value)};
+                                                } else {
+                                                    return {...item, fixedQuantity: Number(e.target.value) - checkList.washableCount};
+                                                }
+                                            })
+                                        })} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formGroupEmail">
+                                    <Form.Label>洗濯可能日数</Form.Label>
+                                    <Form.Control type="number" placeholder="洗濯可能日数" min={0} 
+                                        value={checkList.washableCount}
+                                        onChange={e => setCheckList({
+                                            ...checkList,
+                                            washableCount: Number(e.target.value),
+                                            items: checkList.items.map(item => {
+                                                if (item.quantityType === "washing") {
+                                                    return {...item, fixedQuantity: checkList.stayCount - Number(e.target.value)};
+                                                } else {
+                                                    return item;
+                                                }
+                                            })
+                                        })} />
+                                </Form.Group>
+                            </Form>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+                ):(<></>)
+            }
 
             <Form.Group className="d-grid gap-2">
                 <ToggleButton
