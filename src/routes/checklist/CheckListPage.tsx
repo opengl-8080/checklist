@@ -1,5 +1,5 @@
 import CheckListService from "../../service/CheckListService";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import CheckListDto from "../../dto/checklist/CheckListDto";
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
@@ -133,7 +133,7 @@ function CheckListPage() {
                                         </ToggleButton>
                                 </td>
                             </tr>
-                            : <></>
+                            : <Fragment key={index}></Fragment>
                         ))
                     }
                 </tbody>
