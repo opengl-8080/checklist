@@ -52,6 +52,17 @@ function ModifyCheckListPage() {
         });
     }
 
+    function removeCheckedItems() {
+        if (!window.confirm("確認済みの項目を全て削除します。よろしいですか？")) {
+            return;
+        }
+
+        setCheckList({
+            ...checkList,
+            items: checkList.items.filter(item => !item.checked)
+        });
+    }
+
     return (
         <Stack gap={3}>
             <h1>チェックリスト編集</h1>
@@ -63,6 +74,11 @@ function ModifyCheckListPage() {
                             onAddCheckItem={item => setCheckList({...checkList, items: [...checkList.items, item]})} />
 
                 <PresetAppender onAppendPreset={onAppendPreset} />
+
+                <Form.Group className="mb-3 d-grid gap-2">
+                    <Button onClick={removeCheckedItems} variant="danger">確認済みを削除する</Button>
+                </Form.Group>
+
 
                 <CheckListEditTable items={checkList.items}
                     onChangeItems={items => setCheckList({...checkList, items: items})} />
