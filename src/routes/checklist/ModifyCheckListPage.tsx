@@ -63,6 +63,26 @@ function ModifyCheckListPage() {
         });
     }
 
+    function copy() {
+        if (!window.confirm("コピーを作成します。よろしいですか？")) {
+            return;
+        }
+
+        let copied = {
+            ...checkList,
+            id: window.crypto.randomUUID(),
+            name: `${checkList.name} - コピー`,
+            items: checkList.items.map(item => {
+                return {
+                    ...item,
+                    checked: false
+                };
+            })
+        };
+        CheckListService.register(copied);
+        navigate("/");
+    }
+
     return (
         <Stack gap={3}>
             <h1>チェックリスト編集</h1>
@@ -83,13 +103,19 @@ function ModifyCheckListPage() {
                 <CheckListEditTable items={checkList.items}
                     onChangeItems={items => setCheckList({...checkList, items: items})} />
 
-                <Form.Group className="mb-3 d-grid gap-2">
-                    <Button onClick={save} variant="success">保存</Button>
-                </Form.Group>
+                <Stack gap={4}>
+                    <Form.Group className="mb-3 d-grid gap-2">
+                        <Button onClick={save} variant="success">保存</Button>
+                    </Form.Group>
+                    
+                    <Form.Group className="mb-3 d-grid gap-2">
+                        <Button onClick={copy} variant="primary">コピー</Button>
+                    </Form.Group>
 
-                <Form.Group className="mb-3 d-grid gap-2">
-                    <Button onClick={remove} variant="danger">チェックリストを削除</Button>
-                </Form.Group>
+                    <Form.Group className="mb-3 d-grid gap-2">
+                        <Button onClick={remove} variant="danger">チェックリストを削除</Button>
+                    </Form.Group>
+                </Stack>
             </Form>
         </Stack>
     );
