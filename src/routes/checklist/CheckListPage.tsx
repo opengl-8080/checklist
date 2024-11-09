@@ -146,6 +146,7 @@ function CheckListPage() {
                     variant="outline-success"
                     checked={showCheckedItem}
                     type="checkbox"
+                    onChange={e => setShowCheckedItem(e.target.checked)}
                     >
                     {showCheckedItem ? "チェック済みを非表示" : "チェック済みを表示"}
                 </ToggleButton>
