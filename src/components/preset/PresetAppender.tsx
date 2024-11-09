@@ -43,7 +43,7 @@ export default function PresetAppender(props: Props) {
                             <Form.Select value={presetId} onChange={e => setPresetId(e.target.value)}>
                                 {
                                     presets.map((preset, index) => (
-                                        <option key={index} value={preset.id} selected={index === 0}>{preset.name}</option>
+                                        <option key={index} value={preset.id}>{preset.name}</option>
                                     ))
                                 }
                             </Form.Select>
